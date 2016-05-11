@@ -1,5 +1,6 @@
 var fs = require('fs');
 var html = fs.readFileSync("./api/script.html",'utf-8');
+html = html.replace(/!!!HOST!!!/g, process.env.HOST);
 
 module.exports = function(req, res) {
   if(!req.body.params){

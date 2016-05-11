@@ -1,5 +1,9 @@
 # mixmax_rank
 
+Add rate functionality to your mixmax
+
+![Rate](https://s3-sa-east-1.amazonaws.com/mixmax-rank/mixmax.png)
+
 ## Preparation
 * Start an amazon ec2 instance
 * Install Openssl

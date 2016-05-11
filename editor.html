@@ -1,0 +1,67 @@
+<html>
+<head>
+	<base href="/editor">
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  	<title>Mixmax &middot; Rank</title>
+
+  	<!-- Mixmax SDK -->
+  	<script defer src="https://d1xa36cy0xt122.cloudfront.net/v1/Mixmax.js"></script>
+
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-aNUYGqSUL9wG/vP7+cWZ5QOM4gsQou3sBfWRr/8S3R1Lv0rysEmnwsRKMbhiQX/O" crossorigin="anonymous">
+  	<link rel="stylesheet" href="/textAngular.css">
+  	<!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>-->
+  	<style>
+  	.editor,.buttons{
+  		margin: 10px 0px;
+  		padding: 0px 10px;
+  	}
+  	</style>
+
+  	<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  	<script src='/textAngular-rangy.min.js'></script>
+	<script src='/textAngular-sanitize.min.js'></script>
+  	<script src="/textAngular.min.js"></script>
+  	<script src="/angular-uuid.js"></script>
+</head>
+
+<body ng-app="mixmax" ng-controller="rankCtrl">
+	<div text-angular ng-model="info.html" class="editor"></div>
+	<div class="buttons">
+		<button class="btn btn-primary" ng-click="confirm()" ng-disabled="info.text === null || info.text.length < 1">Confirm</button>
+		<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+	</div>
+	<script>
+
+		angular.module('mixmax',['textAngular','angular-uuid'])
+		.config(['$locationProvider', function($locationProvider){
+    		$locationProvider.html5Mode(true);    
+		}])
+		.controller('rankCtrl',['$scope','$location','uuid',function($scope,$location,uuid){
+			
+			$scope.info = {html : null, uuid : null};
+			$scope.params = $location.search();
+			if($scope.params.data){
+				var data = JSON.parse($scope.params.data);
+				$scope.info.html = data.html;
+				$scope.info.uuid = data.uuid;
+			}else{
+				$scope.info.uuid = uuid.v4();
+			}
+
+			$scope.confirm = function(){
+				Mixmax.done($scope.info);
+			};
+
+			$scope.cancel = function(){
+				Mixmax.cancel();
+			};
+		}]);
+
+	</script>
+</body>
+</html>

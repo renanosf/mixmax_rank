@@ -1,0 +1,31 @@
+{
+  "name": "mixmax_rank",
+  "version": "1.0.0",
+  "description": "rank my messages",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renanosf/mixmax_rank.git"
+  },
+  "keywords": [
+    "rank",
+    "mixmax"
+  ],
+  "author": "Renan Fortes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renanosf/mixmax_rank/issues"
+  },
+  "homepage": "https://github.com/renanosf/mixmax_rank#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "promise": "^7.1.1",
+    "redis": "^2.6.0-2",
+    "uuid": "^2.0.2"
+  }
+}
